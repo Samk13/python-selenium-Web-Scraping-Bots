@@ -29,3 +29,14 @@ class Booking(webdriver.Chrome):
         selected_currency_element = self.find_element_by_css_selector(
             f'a[data-modal-header-async-url-param*="selected_currency={currency}"]')
         selected_currency_element.click()
+
+    def close_cookie_banner(self):
+        close_button = self.find_element_by_id(
+            'onetrust-accept-btn-handler')
+        print("should be clicked now!")
+        close_button.click()
+
+    def select_place_to_go(self, place_to_go):
+        search_field = self.find_element_by_id('ss')
+        search_field.clear()
+        search_field.send_keys(place_to_go)
