@@ -31,10 +31,14 @@ class Booking(webdriver.Chrome):
         selected_currency_element.click()
 
     def close_cookie_banner(self):
-        close_button = self.find_element_by_id(
-            'onetrust-accept-btn-handler')
-        print("should be clicked now!")
-        close_button.click()
+        try:
+            close_button = self.find_element_by_id(
+                'onetrust-accept-btn-handler')
+            print("should be clicked now!")
+            close_button.click()
+        except:
+            print('not be able to find the cookie banner')
+            pass
 
     def select_place_to_go(self, place_to_go):
         search_field = self.find_element_by_id('ss')
@@ -50,4 +54,28 @@ class Booking(webdriver.Chrome):
 
         check_out_element = self.find_element_by_css_selector(
             f'td[data-date="{check_out_date}"]')
-        check_out_element.hover()
+        check_out_element.click()
+
+    def select_adults(self, count=1):
+        selection_element = self.find_element_by_id('xp__guests__toggle')
+        selection_element.click()
+
+        while True:
+            decrease_adults_element = self.find_element_by_css_selector(
+                'button[aria-label="Decrease number of Adults"]')
+            decrease_adults_element.click()
+            adults_value_element = self.find_element_by_id('group_adults')
+            adults_value = adults_value_element.get_attribute(
+                "value")  # get the value of adults count
+            if int(adults_value) == 1:
+                break
+        # if value of adults reach one we get out of the loop
+        incrase_adults_element = self.find_element_by_css_selector(
+            'button[aria-label="Increase number of Adults"]')
+        for i in range(count - 1):
+            incrase_adults_element.click()
+
+    def click_search(self):
+        search_button = self.find_element_by_css_selector(
+            'button[type="submit"]')
+        search_button.click()
