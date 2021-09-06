@@ -11,7 +11,12 @@ class Booking(webdriver.Chrome):
         self.driver_path = driver_path
         self.tear_down = tear_down
         os.environ["PATH"] += os.pathsep + self.driver_path
-        super(Booking, self).__init__()
+        # ignore the driver warnings on the console
+        options = webdriver.ChromeOptions()
+        options.add_experimental_option(
+            'excludeSwitches', ['enable-automation', 'enable-logging'])
+
+        super(Booking, self).__init__(options=options)
         self.implicitly_wait(const.WAITING_TIME)
         self.maximize_window()
 
