@@ -26,3 +26,9 @@ format is: 2021-09-15
 number of adults is a bunmber: 3
 
 you should see in the terminal the result in a table.
+
+### TODO
+
+create venv
+create requirements.txt
+check inputs with useful error messages
