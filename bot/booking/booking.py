@@ -2,6 +2,8 @@ import os
 import booking.constants as const
 from selenium import webdriver
 from booking.booking_filtration import BookingFiltration
+from booking.booking_report import BookingReport
+from prettytable import PrettyTable
 
 
 class Booking(webdriver.Chrome):
@@ -91,6 +93,9 @@ class Booking(webdriver.Chrome):
         filtration.sort_price_lower_first()
 
     def report_results(self):
-        hotel_boxes = self.find_element_by_id(
-            'hotellist_inner').find_elements_by_class_name('sr_property_block')
-        return hotel_boxes
+        hotel_boxes = self.find_element_by_id('hotellist_inner')
+        report = BookingReport(hotel_boxes)
+        table = PrettyTable(
+            field_names=['Hotel Name', 'Hotel Price', 'Hotel Rating'])
+        table.add_rows(report.pull_deal_box_attributes())
+        print(table)

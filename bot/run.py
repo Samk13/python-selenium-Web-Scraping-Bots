@@ -7,13 +7,15 @@ try:
         bot.land_first_page()
         bot.close_cookie_banner()
         bot.change_currency(currency='SEK')
-        bot.select_place_to_go("Stockholm")
-        bot.select_dates(check_in_date='2021-09-15',
-                         check_out_date='2021-09-28')
-        bot.select_adults(10)
+        bot.select_place_to_go(input("Where you want to go?"))
+        # format is 2021-09-15
+        bot.select_dates(check_in_date=input("Check in date?"),
+                         check_out_date=input("Check out date?"))
+        bot.select_adults(int(input("How many adults?")))
         bot.click_search()
         bot.apply_filtration()
-        print(len(bot.report_results()))
+        bot.refresh()  # work around to let the bot grab the right data cause it's too fast
+        bot.report_results()
 
 except Exception as e:
     if 'in PATH' in str(e):
