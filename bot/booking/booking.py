@@ -89,3 +89,8 @@ class Booking(webdriver.Chrome):
     def apply_filtration(self):
         filtration = BookingFiltration(driver=self)
         filtration.sort_price_lower_first()
+
+    def report_results(self):
+        hotel_boxes = self.find_element_by_id(
+            'hotellist_inner').find_elements_by_class_name('sr_property_block')
+        return hotel_boxes

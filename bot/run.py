@@ -13,6 +13,8 @@ try:
         bot.select_adults(10)
         bot.click_search()
         bot.apply_filtration()
+        print(len(bot.report_results()))
+
 except Exception as e:
     if 'in PATH' in str(e):
         print(
