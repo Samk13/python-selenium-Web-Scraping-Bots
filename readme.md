@@ -27,6 +27,8 @@ number of adults is a number: 3
 
 you should see in the terminal the result in a table.
 
+add one more line to the code and run again.
+
 ### TODO
 
 create venv
